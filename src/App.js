@@ -9,7 +9,7 @@ const defaultTodos = [
   { text: 'cortar cebolla', completed: true },
   { text: 'tomar el cafe', completed: true },
   { text: 'introduccion al cursod e react ', completed: true },
-  { text: 'llorar con la llorona ', completed: true }
+  { text: 'llorar con la llorona ', completed: false }
 ];
 
 function App() {

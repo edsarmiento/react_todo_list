@@ -1,8 +1,11 @@
+import './TodoSearch'
 
 function TodoSearch(){
     return (
-      <input placeholder="chido one" />
-        
+      <input
+        placeholder="chido one"
+        className='TodoSearch'
+      />
     );
   }
   
