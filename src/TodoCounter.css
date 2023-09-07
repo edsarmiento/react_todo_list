@@ -9,3 +9,9 @@
   font-weight: bold;
   color: red;
 }
+
+.TodoCounterCongrats {
+  font-weight: bold;
+  color: green;
+  font-size: 30px;
+}
