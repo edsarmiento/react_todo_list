@@ -29,17 +29,20 @@ function App() {
   const completeTodo = (text) => {
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex(
-      (todo) => todo.text == text
+      (todo) => todo.text === text
     );
+
     newTodos[todoIndex].completed = true;
     setTodos(newTodos);
   }
 
   const deleteTodo = (text) => {
+    console.log('here we are 2');
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex(
-      (todo) => todo.text == text
+      (todo) => todo.text === text
     );
+
     newTodos.splice(todoIndex, 1);
     setTodos(newTodos);
   }
@@ -47,8 +50,14 @@ function App() {
   return (
     <React.Fragment>
 
-      <TodoCounter completed={completedTodos} total={totalTodos} />
-      <TodoSearch SearchValue={searchValue} setSearchValue={setSearchValue} />
+      <TodoCounter 
+        completed={completedTodos}
+        total={totalTodos}
+      />
+      <TodoSearch
+        SearchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
 
       <TodoList>
         { searchedTodos.map(todo => (
