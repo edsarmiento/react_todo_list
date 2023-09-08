@@ -5,16 +5,31 @@ import { TodoSearch } from './TodoSearch';
 import { TodoList } from './TodoList';
 import { TodoItem } from './TodoItem';
 
-const defaultTodos = [
-  { text: 'cortar cebolla', completed: true },
-  { text: 'toLALAmar el cafe', completed: false },
-  { text: 'introduccion al cursod e react ', completed: false },
-  { text: 'intro con la llorona ', completed: false }
-];
+function useLocalStorage(itemName, initialValue) {
+  const localStorageTodos = localStorage.getItem(itemName);
+
+  let parsedItem;
+
+  if (!localStorageTodos) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = initialValue;
+  } else {
+    parsedItem = JSON.parse(localStorageTodos);
+  }
+
+  const [item, setItem] = React.useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    localStorage.setItem('TODOS_V1', JSON.stringify(newItem));
+    setItem(newItem);
+  }
+
+  return [item, saveItem]
+}
 
 function App() {
   // states
-  const [todos, setTodos] = React.useState(defaultTodos);
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = React.useState('');
 
   // Derivated States
@@ -27,24 +42,24 @@ function App() {
   );
   
   const completeTodo = (text) => {
-    const newTodos = [...todos];
-    const todoIndex = newTodos.findIndex(
+    const newItem = [...todos];
+    const todoIndex = newItem.findIndex(
       (todo) => todo.text === text
     );
 
-    newTodos[todoIndex].completed = true;
-    setTodos(newTodos);
+    newItem[todoIndex].completed = true;
+    saveTodos(newItem);
   }
 
   const deleteTodo = (text) => {
     console.log('here we are 2');
-    const newTodos = [...todos];
-    const todoIndex = newTodos.findIndex(
+    const newItem = [...todos];
+    const todoIndex = newItem.findIndex(
       (todo) => todo.text === text
     );
 
-    newTodos.splice(todoIndex, 1);
-    setTodos(newTodos);
+    newItem.splice(todoIndex, 1);
+    saveTodos(newItem);
   }
 
   return (
