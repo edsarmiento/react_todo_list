@@ -1,4 +1,4 @@
-import {TodoIcon} from './TodoIcon';
+import {TodoIcon} from './';
 
 function CompleteIcon({completed, onComplete}){
   return(
