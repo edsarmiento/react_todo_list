@@ -7,7 +7,7 @@ import { TodoItem } from '../TodoItem';
 import React from 'react';
 
 function App() {
-  // states
+  // initial states
   const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -42,30 +42,29 @@ function App() {
   }
 
   return (
-    <React.Fragment>
+      <React.Fragment>
+        <TodoCounter 
+          completed={completedTodos}
+          total={totalTodos}
+        />
 
-      <TodoCounter 
-        completed={completedTodos}
-        total={totalTodos}
-      />
-      <TodoSearch
-        SearchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
+        <TodoSearch
+          SearchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
 
-      <TodoList>
-        { searchedTodos.map(todo => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeTodo(todo.text)}
-            onDelete={() => deleteTodo(todo.text)}
-          />
-        )) }
-      </TodoList>
-
-     <CreateTodoButton />
+        <TodoList>
+          { searchedTodos.map(todo => (
+            <TodoItem
+              key={todo.text}
+              text={todo.text}
+              completed={todo.completed}
+              onComplete={() => completeTodo(todo.text)}
+              onDelete={() => deleteTodo(todo.text)}
+            />
+          )) }
+        </TodoList>
+      <CreateTodoButton />
     </React.Fragment>
   );
 }
