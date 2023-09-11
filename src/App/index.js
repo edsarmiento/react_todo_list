@@ -4,7 +4,13 @@ import React from 'react';
 
 function App() {
   // initial states
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []);
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error
+  } = useLocalStorage('TODOS_V1', []);
+
   const [searchValue, setSearchValue] = React.useState('');
 
   // Derivated States
@@ -39,6 +45,8 @@ function App() {
 
   return (
       <AppUI
+        loading={loading}
+        error={error}
         completedTodos={completedTodos}
         totalTodos={totalTodos}
         searchValue={searchValue}

@@ -5,7 +5,17 @@ import { TodoSearch } from '../TodoSearch';
 import { TodoList } from '../TodoList';
 import { TodoItem } from '../TodoItem';
 
-function AppUI({completedTodos, totalTodos, searchValue, setSearchValue, searchedTodos, completeTodo, deleteTodo}) {
+function AppUI({
+  loading,
+  error,
+  completedTodos,
+  totalTodos,
+  searchValue,
+  setSearchValue,
+  searchedTodos,
+  completeTodo,
+  deleteTodo
+}) {
   return(
     <React.Fragment>
         <TodoCounter 
@@ -19,6 +29,10 @@ function AppUI({completedTodos, totalTodos, searchValue, setSearchValue, searche
         />
 
         <TodoList>
+          {loading && <p>Cargando</p>}
+          {error && <p>cargando</p>}
+          {(!loading && searchedTodos.lenght === 0) && <p>add your first todo</p>}
+
           { searchedTodos.map(todo => (
             <TodoItem
               key={todo.text}
