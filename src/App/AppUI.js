@@ -1,9 +1,12 @@
 import React from 'react';
 import { CreateTodoButton } from '../CreateTodoButton';
-import { TodoCounter } from '../TodoCounter';
-import { TodoSearch } from '../TodoSearch';
-import { TodoList } from '../TodoList';
-import { TodoItem } from '../TodoItem';
+import { TodoCounter }      from '../TodoCounter';
+import { TodoSearch }       from '../TodoSearch';
+import { TodoList }         from '../TodoList';
+import { TodoItem }         from '../TodoItem';
+import { TodosLoading }     from '../TodosLoading';
+import { TodosError }       from '../TodosError';
+import { EmptyTodos}        from '../EmptyTodos';
 
 function AppUI({
   loading,
@@ -29,9 +32,9 @@ function AppUI({
         />
 
         <TodoList>
-          {loading && <p>Cargando</p>}
-          {error && <p>cargando</p>}
-          {(!loading && searchedTodos.lenght === 0) && <p>add your first todo</p>}
+          {loading && <TodosLoading/>}
+          {error && <TodosError/>}
+          {(!loading && searchedTodos.lenght === 0) && <EmptyTodos/>}
 
           { searchedTodos.map(todo => (
             <TodoItem
